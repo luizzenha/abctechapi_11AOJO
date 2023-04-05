@@ -1,10 +1,6 @@
 package br.com.fiap.abctechapi.util;
 
-import br.com.fiap.abctechapi.service.AssistanceService;
-import br.com.fiap.abctechapi.service.impl.AssistanceServiceImpl;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.io.InputStream;
