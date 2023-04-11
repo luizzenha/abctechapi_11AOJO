@@ -21,7 +21,7 @@ public class AssistanceController {
     public AssistanceController(AssistanceApplication assistanceApplication){
         this.assistanceApplication = assistanceApplication;
     }
-    
+
     @GetMapping
     public ResponseEntity<List<AssistResponseDto>> getAssists(){
         return ResponseEntity.ok(assistanceApplication.getAssists());
