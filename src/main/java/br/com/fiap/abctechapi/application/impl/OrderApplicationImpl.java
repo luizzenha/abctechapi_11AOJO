@@ -23,7 +23,7 @@ public class OrderApplicationImpl implements OrderApplication {
     }
 
     @Override
-    public void createOrder(OrderDto orderDto) {
+    public void createOrder(OrderDto orderDto) throws Exception {
         //service?
         Order order = new Order();
         order.setOperatorId(orderDto.getOperatorId());

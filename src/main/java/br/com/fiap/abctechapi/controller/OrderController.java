@@ -24,7 +24,7 @@ public class OrderController {
 
 
     @PostMapping
-    public ResponseEntity<String> create(@Valid @RequestBody OrderDto orderDto){
+    public ResponseEntity<String> create(@Valid @RequestBody OrderDto orderDto) throws Exception {
 
         this.orderApplication.createOrder(orderDto);
         return ResponseEntity.ok().build();

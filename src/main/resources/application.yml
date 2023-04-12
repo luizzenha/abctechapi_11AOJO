@@ -10,5 +10,5 @@ spring:
     url: jdbc:mysql://${DB_HOSTNAME}:${DB_PORT}/${DB_NAME}
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: none
     show-sql: true
