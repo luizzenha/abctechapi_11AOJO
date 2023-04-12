@@ -23,7 +23,7 @@ public class Order {
     private Long operatorId;
 
     @ManyToMany
-    private List<Assistance> assistanceList;
+    private List<Assistance> assists;
 
     @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "start_order_location_id", foreignKey = @ForeignKey(name = "FK_start_order_id"))
