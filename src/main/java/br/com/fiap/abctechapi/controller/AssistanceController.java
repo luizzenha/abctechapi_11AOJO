@@ -24,6 +24,7 @@ public class AssistanceController {
 
     @GetMapping
     public ResponseEntity<List<AssistResponseDto>> getAssists(){
+
         return ResponseEntity.ok(assistanceApplication.getAssists());
     }
 
