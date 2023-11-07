@@ -1,0 +1,47 @@
+name: Deploy
+run-name: Deploy wokflow
+on:
+    pull_request:
+        types:
+            - closed
+jobs:
+    Build:
+        if: ${{ github.event.pull_request.merged }}
+        name: Prepare Build
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v3
+              name: Checkout
+            - name: Setup Java
+              uses: actions/setup-java@v3
+              with:
+                  distribution: 'temurin'
+                  java-version: '17'
+            - name: Compile
+              run: mvn clean test compile war:war
+            - name: Copy
+              run: mkdir staging && cp target/*.war staging
+            - name: Upload
+              uses: actions/upload-artifact@v3
+              with:
+                  name: Package
+                  path: staging
+    Deploy:
+        needs: Build
+        name: Deploy
+        runs-on: ubuntu-latest
+        steps:
+            - name: Download
+              uses: actions/download-artifact@v3
+              with:
+                  path: staging
+            - name: Deploy to EB
+              uses: einaregilsson/beanstalk-deploy@v21
+              with:
+                  aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
+                  aws_secret_key: ${{ secrets.AWS_SECRET_KEY }}
+                  application_name: 11aojo
+                  environment_name: 11aojo-env
+                  version_label: ${{ github.ref_name }}-R${{ github.run_id }}-V${{ github.run_number }}
+                  region: us-east-1
+                  deployment_package: ./staging/Package/abctechapi-0.0.2-SNAPSHOT.war
